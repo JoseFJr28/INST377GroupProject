@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Let Them Cook!</title>
+
+        <style>
+            body {
+                background-color: beige;
+            }
+        </style>
+
+        <script src="foodFetch.js"></script>
+
+    </head>
+
+    <body>
+        <h2>Let Them Cook!</h2>
+        <br>
+
+        <form id="barcodeForm">
+            <label for="barcode">Enter Barcode Number:</label>
+            <input type="text" id="barcode" required>
+            <br>
+            <input type="submit" value="Submit" onclick="findInfo(event)">
+        </form>
+
+    </body>
+</html>
