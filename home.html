@@ -33,6 +33,22 @@
         list-style-type: none;
     }
 
+    #allergenForm {
+        width: 50%;
+        padding: 5px;
+        float: left;
+    }
+
+    #popUp {
+        background-color: whitesmoke;
+        border: 2px solid;
+        margin: 20px;
+        padding: 5px;
+        width: 40%;
+        float: right
+        
+    }
+
 </style>
     <head>
         <title>Let Them Cook!</title>
@@ -56,18 +72,53 @@
 
     <body>
         
+        <div id="allergenForm">
+        <h3>Enter the barcode number of your product below and select which allergens you have.</h3>
+        <p>If you do not see an allergen you have, enter it in <i>Additional Allergens</i>.</p>
         <br>
 
         <form id="barcodeForm">
             <label for="barcode">Enter Barcode Number:</label>
             <input type="text" id="barcode" required>
+            <br><br>
+            <input type="checkbox" id="milk" name="milk" value="milk">
+            <label for="milk">Milk </label>
             <br>
+            <input type="checkbox" id="egg" name="egg" value="milk">
+            <label for="egg">Egg </label>
+            <br>
+            <input type="checkbox" id="peanut" name="peanut" value="peanut">
+            <label for="peanut">Peanut </label>
+            <br>
+            <input type="checkbox" id="nuts" name="nuts" value="nuts">
+            <label for="nuts">Nuts </label>
+            <br>
+            <input type="checkbox" id="soybean" name="soybean" value="soybean">
+            <label for="soybean">Soybean </label>
+            <br>
+            <input type="checkbox" id="shellfish" name="shellfish" value="shellfish">
+            <label for="shellfish">Shellfish </label>
+            <br>
+            <input type="checkbox" id="fish" name="fish" value="fish">
+            <label for="fish">Fish </label>
+            <br>
+            <input type="checkbox" id="sesame" name="sesame" value="sesame">
+            <label for="sesame">Sesame </label>
+            <br>
+            <input type="checkbox" id="gluten" name="gluten" value="gluten">
+            <label for="gluten">Gluten </label>
+            <br><br>
+            <label for="filter">Additional Allergens:</label>
+            <input type="text" id="additional">
+            <br><br>
             <input type="submit" value="Submit" onclick="findInfo(event)">
         </form>
-        <form id="filter">
-            <label for="filter">Filter:</label>
-            <input type="text" id="bardcode" required>
-            <button>Apply</button>
-        </form>
+        </div>
+
+        <div id="popup">
+            <p>This will be where the allergen info gets returned!</p>
+            <b><p>Note: Use the "allergens_hierarchy" array in the returned object from the API. This seems to produce the most reliable allergen information.</p></b>
+        </div>
+
     </body>
 </html>
