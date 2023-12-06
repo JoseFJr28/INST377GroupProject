@@ -3,7 +3,7 @@ function findInfo(event) {
 
     //get variables
     var barcode = document.getElementById("barcode").value;
-    var pName = document.getElementById("pName");
+    var productName = document.getElementById("productName");
     var allergenTable = document.getElementById("allergenTable");
 
     pullFromForm()
@@ -43,7 +43,7 @@ function findInfo(event) {
 
         console.log(dataArr.allergens_hierarchy)
 
-        pName.innerHTML = `<h3>${dataArr.product_name}<h3>`
+        productName.innerHTML = `<h3>${dataArr.product_name}<h3>`
     })
 }
 
