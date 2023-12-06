@@ -1,7 +1,7 @@
 <html>
 <style>
     /* The Logo */
-    header{
+    header {
         text-align: center;
         font-size: 50px;
     }
@@ -46,33 +46,46 @@
         padding: 5px;
         width: 40%;
         float: right
-        
     }
-
 </style>
-    <head>
-        <title>Let Them Cook!</title>
 
-        <style>
-            body {
-                background-color: beige;
-            }
-        </style>
+<head>
+    <title>Let Them Cook!</title>
 
-        <script src="foodFetch.js"></script>
+    <style>
+        body {
+            background-color: beige;
+        }
 
-    </head>
-    <header>&#127828Let Them Cook!&#127859</header>
-    <nav id="main-nav">
-        <a href="home.html"><li>Home</li></a>
-        <a href="recipes.html"><li>Recipes</li></a>
-        <a href="about.html"><li>About</li></a>
-        <a href="contact.html"><li>Contact</li></a>
-    </nav>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
 
-    <body>
-        
-        <div id="allergenForm">
+    <script src="foodFetch.js"></script>
+
+</head>
+<header>&#127828Let Them Cook!&#127859</header>
+<nav id="main-nav">
+    <a href="home.html">
+        <li>Home</li>
+    </a>
+    <a href="recipes.html">
+        <li>Recipes</li>
+    </a>
+    <a href="about.html">
+        <li>About</li>
+    </a>
+    <a href="contact.html">
+        <li>Contact</li>
+    </a>
+</nav>
+
+<body>
+
+    <div id="allergenForm">
         <h3>Enter the barcode number of your product below and select which allergens you have.</h3>
         <p>If you do not see an allergen you have, enter it in <i>Additional Allergens</i>.</p>
         <br>
@@ -108,17 +121,20 @@
             <input type="checkbox" id="gluten" name="gluten" value="gluten">
             <label for="gluten">Gluten </label>
             <br><br>
-            <label for="filter">Additional Allergens:</label>
-            <input type="text" id="additional">
-            <br><br>
             <input type="submit" value="Submit" onclick="findInfo(event)">
         </form>
-        </div>
+    </div>
 
-        <div id="popup">
-            <p>This will be where the allergen info gets returned!</p>
-            <b><p>Note: Use the "allergens_hierarchy" array in the returned object from the API. This seems to produce the most reliable allergen information.</p></b>
-        </div>
+    <div id="popup">
+        <p>This will be where the allergen info gets returned!</p>
+        <div id="productName"></div>
+        <table id="allergenTable"></table>
+        <b>
+            <p>Note: Use the "allergens_hierarchy" array in the returned object from the API. This seems to produce the
+                most reliable allergen information.</p>
+        </b>
+    </div>
 
-    </body>
+</body>
+
 </html>
