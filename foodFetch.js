@@ -1,15 +1,12 @@
-function findInfo(event) {
-    event.preventDefault();
 
-    //Get variables
+/*Returns am array of alleergens of product and possbly name from the API*/
+function findInfo() {
     var barcode = document.getElementById("barcode").value;
-    var productName = document.getElementById("productName");
-    var allergenTable = document.getElementById("allergenTable");
+    //This is to get the allergens without the "en:" in their name
+    var allergenList = []
+    var finalAllergenList = []
+   
 
-    //Options the user selects for the item being search
-    var options = filteredInfo()
-    console.log(options)
-    
     //Fetching the API
     fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)
         .then((res) => res.json())
@@ -17,46 +14,23 @@ function findInfo(event) {
 
             //The item that is being search
             var dataArr = info.product
+           console.log(dataArr)
 
-            var allergenCount = dataArr.allergens_hierarchy.length
+            //console.log(allergenCount)
             var allergens = dataArr.allergens_hierarchy
-            productName.value = dataArr.product_name
-            //console.log(productName.value)
-
-            let display =
-                `<tr>
-            <th><b>Allergens</b></th>
-            <th><b>Contains?</b></th>
-            </tr>`;
-            
-
-            for (let x = 0; x < allergenCount; x++) {
-                console.log(allergens[x].slice(3))
-
-                display += `<tr>
-            <td id='names'>${allergens[x].slice(3)}</td>
-            <td id='response'>${allergens[x].slice(3)}</td>
-            </tr>`;
-            }
-            allergenTable.innerHTML += display;
+            //console.log(allergens)
+           for (const [key,value] of Object.entries(allergens)){
+            console.log(typeof(value))
+            finalAllergenList.push(value.slice(3))
+           }
+           console.log(finalAllergenList)
+           return finalAllergenList
     })
+    
 }
-
-
-function filteredInfo(filter){
-    var triggeredAllergens = []
-    var selectedAllergens = pullFromForm()
-
-    selectedAllergens.forEach((element1) => {
-        allergens.forEach((element2) =>{
-            if(element1 == element2) {
-                triggeredAllergens.push(`${element1}`)
-                console.log(triggeredAllergens)
-            }})})
-}
-
+/*Returns an array that is selected from the form by the user*/
 function pullFromForm() {
-    var totalAllergens  = ["milk", "egg", "peanut", "nuts", "soybean", "shellfish", "fish", "seasame", "gluten"];
+    var totalAllergens  = ["milk", "egg", "peanuts", "nuts", "soybeans", "shellfish", "fish", "seasame", "gluten"];
     var selectedAllergens = []
 
     totalAllergens.forEach((element) => {
@@ -68,4 +42,33 @@ function pullFromForm() {
         }
     }})
     console.log(selectedAllergens)
+    return selectedAllergens
+}
+/*Compares both arrays coming from pullfromform and findinfo 
+Array1 == the product allergen hierarchy
+Array2 == the checkbox allergens
+*/
+ function filteredInfo(){
+     var triggeredAllergens = []
+     var selectedAllergens = pullFromForm()
+     var defuaultAllergens = findInfo()
+
+     console.log(selectedAllergens)
+     console.log(defuaultAllergens)
+
+     selectedAllergens.forEach((element1) => {
+         defuaultAllergens.forEach((element2) =>{
+             if(element1 == element2) {
+                console.log(element1)
+                 triggeredAllergens.push(`${element1}`)
+                 console.log(triggeredAllergens)
+                 console.log("im alive")
+             }})})
+ }
+
+/*Grabs the main array wfrom the comparison to display in table*/
+function tableMaker(event){
+    event.preventDefault();
+    console.log("function is working")
+    filteredInfo()
 }
