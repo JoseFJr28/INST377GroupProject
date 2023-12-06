@@ -7,7 +7,8 @@ function findInfo(event) {
     var allergenTable = document.getElementById("allergenTable");
 
     //Options the user selects for the item being search
-    var options = pullFromForm()
+    var options = filteredInfo()
+    console.log(options)
     
     //Fetching the API
     fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)
@@ -43,7 +44,15 @@ function findInfo(event) {
 
 
 function filteredInfo(filter){
+    var triggeredAllergens = []
+    var selectedAllergens = pullFromForm()
 
+    selectedAllergens.forEach((element1) => {
+        allergens.forEach((element2) =>{
+            if(element1 == element2) {
+                triggeredAllergens.push(`${element1}`)
+                console.log(triggeredAllergens)
+            }})})
 }
 
 function pullFromForm() {
