@@ -84,7 +84,7 @@
             <input type="checkbox" id="milk" name="milk" value="milk">
             <label for="milk">Milk </label>
             <br>
-            <input type="checkbox" id="egg" name="egg" value="milk">
+            <input type="checkbox" id="egg" name="egg" value="egg">
             <label for="egg">Egg </label>
             <br>
             <input type="checkbox" id="peanut" name="peanut" value="peanut">
@@ -108,15 +108,13 @@
             <input type="checkbox" id="gluten" name="gluten" value="gluten">
             <label for="gluten">Gluten </label>
             <br><br>
-            <label for="filter">Additional Allergens:</label>
-            <input type="text" id="additional">
-            <br><br>
             <input type="submit" value="Submit" onclick="findInfo(event)">
         </form>
         </div>
 
         <div id="popup">
-            <p>This will be where the allergen info gets returned!</p>
+            <div id="pName"></div>
+            <div id="allergenTable"></div>
             <b><p>Note: Use the "allergens_hierarchy" array in the returned object from the API. This seems to produce the most reliable allergen information.</p></b>
         </div>
 
