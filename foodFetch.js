@@ -33,8 +33,8 @@ function findInfo(event) {
                 console.log(allergens[x].slice(3))
 
                 display += `<tr>
-            <td id='allergens'>${allergens[x].slice(3)}</td>
-            <td id='allergens'>${productName.value}</td>
+            <td id='names'>${allergens[x].slice(3)}</td>
+            <td id='response'>${allergens[x].slice(3)}</td>
             </tr>`;
             }
             theTable.innerHTML += display;
