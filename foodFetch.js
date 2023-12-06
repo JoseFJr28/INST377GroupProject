@@ -5,12 +5,21 @@ function findInfo(event) {
     var barcode = document.getElementById("barcode").value;
 
     //get from api
-    console.log(barcode)
+    //console.log(barcode)
     fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)
     .then((res) => res.json())
-    .then((res) => {
+    .then((info) => {
 
-        console.log(res)
+       console.log(info.product)
+        var dataArr = info.product
 
+        for (let x=0; x<dataArr.length;x++){
+            console.log(x)
+        }
     })
+}
+
+
+function filteredInfo(filter){
+
 }
