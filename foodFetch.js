@@ -1,24 +1,22 @@
 function findInfo(event) {
     event.preventDefault();
 
-    //get variables
+    //Get variables
     var barcode = document.getElementById("barcode").value;
     var productName = document.getElementById("productName");
     var allergenTable = document.getElementById("allergenTable");
 
-    pullFromForm()
-
-    //get from api
-    //console.log(barcode)
+    //Options the user selects for the item being search
+    var options = pullFromForm()
+    
+    //Fetching the API
     fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)
         .then((res) => res.json())
         .then((info) => {
 
-           // console.log(info.product)
+            //The item that is being search
             var dataArr = info.product
 
-          //  console.log(dataArr.allergens_hierarchy)
-            //console.log(dataArr.allergens_hierarchy.length)
             var allergenCount = dataArr.allergens_hierarchy.length
             var allergens = dataArr.allergens_hierarchy
             productName.value = dataArr.product_name
@@ -39,11 +37,7 @@ function findInfo(event) {
             <td id='response'>${allergens[x].slice(3)}</td>
             </tr>`;
             }
-            theTable.innerHTML += display;
-
-        console.log(dataArr.allergens_hierarchy)
-
-        productName.innerHTML = `<h3>${dataArr.product_name}<h3>`
+            allergenTable.innerHTML += display;
     })
 }
 
