@@ -23,10 +23,9 @@ function findInfo() {
             console.log(typeof(value))
             finalAllergenList.push(value.slice(3))
            }
-           console.log(finalAllergenList)
-           return finalAllergenList
     })
-    
+    console.log(finalAllergenList)
+    return finalAllergenList
 }
 /*Returns an array that is selected from the form by the user*/
 function pullFromForm() {
