@@ -8,33 +8,33 @@ async function findInfo() {
 
 
     //Fetching the API
-    var res = await fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)  
+    var res = await fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)
     var info = await res.json()
 
-            //The item that is being search
-            var dataArr = info.product
-            console.log(dataArr)
+    //The item that is being search
+    var dataArr = info.product
+    console.log(dataArr)
 
-            //console.log(allergenCount)
-            var allergens = dataArr.allergens_hierarchy
-            //console.log(allergens)
-            //    for (const [key,value] of Object.entries(allergens)){
-            //     console.log(typeof(value))
-            //     finalAllergenList.push(value.slice(3))
-            //    }
-            for(let i=0; i<allergens.length; i++){
-                console.log(allergens[i].slice(3))
-                allergenList.push(allergens[i].slice(3))
-            }
-            console.log(allergenList)
-            //console.log(finalAllergenList)
-        console.log(allergenList)
+    //console.log(allergenCount)
+    var allergens = dataArr.allergens_hierarchy
+    //console.log(allergens)
+    //    for (const [key,value] of Object.entries(allergens)){
+    //     console.log(typeof(value))
+    //     finalAllergenList.push(value.slice(3))
+    //    }
+    for (let i = 0; i < allergens.length; i++) {
+        console.log(allergens[i].slice(3))
+        allergenList.push(allergens[i].slice(3))
+    }
+    console.log(allergenList)
+    //console.log(finalAllergenList)
+    console.log(allergenList)
     return allergenList
 }
 /*Returns an array that is selected from the form by the user
 considered unequal array comparison*/
 function pullFromForm() {
-    var totalAllergens = ["milk", "egg", "peanuts", "nuts", "soybeans", "shellfish", "fish", "seasame", "gluten"];
+    var totalAllergens = ["milk", "eggs", "peanuts", "nuts", "soybeans", "shellfish", "fish", "seasame", "gluten"];
     var selectedAllergens = []
 
     totalAllergens.forEach((element) => {
@@ -80,20 +80,28 @@ async function filteredInfo() {
 }
 
 /*Grabs the main array wfrom the comparison to display in table*/
-async function tableMaker(event) {
-    event.preventDefault();
-    var editer = document.getElementById("allergenTable")
+async function tableMaker() {
+    //event.preventDefault();
+    var editor = document.getElementById("allergenTable")
     var data = await filteredInfo()
     var defaultAllergens = await findInfo()
     console.log(data.length)
-    for (let x = 0; x<data.length; x++){
-        for (let y = 0; y < defaultAllergens.length; y++){
-            if(defaultAllergens[y] == triggeredAllergens[x]){
 
+    if (data.length == 0) {
+        editor.innerHTML += `&#128540 You are SAFE&#128077 `
+    } else {
+
+        for (let x = 0; x < data.length; x++) {
+            for (let y = 0; y < defaultAllergens.length; y++) {
+                if (defaultAllergens[y] == data[x]) {
+                    editor.innerHTML += `<tr><td>${data[x]}</td><td>Yes</td></tr>`
+                    x++
+                } else {
+                    editor.innerHTML += `<tr><td>${defaultAllergens[x]}</td><td>No</td></tr>`
+                }
             }
-        }
 
+        }
     }
     console.log("function is working")
-    
 }
