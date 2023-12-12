@@ -8,9 +8,8 @@ async function findInfo() {
 
 
     //Fetching the API
-    var test = fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)
-        .then((res) => res.json())
-        .then((info) => {
+    var res = await fetch(`https://world.openfoodfacts.net/api/v2/product/${barcode}`)  
+    var info = await res.json()
 
             //The item that is being search
             var dataArr = info.product
@@ -29,8 +28,6 @@ async function findInfo() {
             }
             console.log(allergenList)
             //console.log(finalAllergenList)
-        })
-        await test
         console.log(allergenList)
     return allergenList
 }
@@ -56,42 +53,47 @@ function pullFromForm() {
 Array1 == the product allergen hierarchy
 Array2 == the checkbox allergens
 */
-function filteredInfo() {
+async function filteredInfo() {
     var triggeredAllergens = []
     //[milk, nuts, soybeans]
     var selectedAllergens = pullFromForm()
     //[milk, peanuts, soybeans]
-    var defaultAllergens = findInfo()
+    var defaultAllergens = await findInfo()
 
     console.log(selectedAllergens)
     console.log(defaultAllergens)
 
     for (let x = 0; x < selectedAllergens.length; x++) {
+        console.log(selectedAllergens[x])
         for (let y = 0; y < defaultAllergens.length; y++) {
+            console.log(defaultAllergens[y])
             if (defaultAllergens[y] == selectedAllergens[x]) {
                 console.log("yes")
+                triggeredAllergens.push(selectedAllergens[x])
             } else {
-                console.log("no")
+                continue
+            }
+        }
+    }
+    console.log(triggeredAllergens)
+    return triggeredAllergens
+}
+
+/*Grabs the main array wfrom the comparison to display in table*/
+async function tableMaker(event) {
+    event.preventDefault();
+    var editer = document.getElementById("allergenTable")
+    var data = await filteredInfo()
+    var defaultAllergens = await findInfo()
+    console.log(data.length)
+    for (let x = 0; x<data.length; x++){
+        for (let y = 0; y < defaultAllergens.length; y++){
+            if(defaultAllergens[y] == triggeredAllergens[x]){
+
             }
         }
 
     }
-
-    // selectedAllergens.forEach((element1) => {
-    //     defaultAllergens.forEach((element2) => {
-    //         if (element1 == element2) {
-    //             console.log(element1)
-    //             triggeredAllergens.push(`${element1}`)
-    //             console.log(triggeredAllergens)
-    //             console.log("im alive")
-    //         }
-    //     })
-    // })
-}
-
-/*Grabs the main array wfrom the comparison to display in table*/
-function tableMaker(event) {
-    event.preventDefault();
     console.log("function is working")
-    filteredInfo()
+    
 }
