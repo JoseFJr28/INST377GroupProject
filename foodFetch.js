@@ -1,3 +1,17 @@
+function definecounter() {
+    var counter = 0;
+}
+
+function reset()    {
+    if (counter == 0)   {
+        tableMaker()
+    } else {
+        var editor = document.getElementById("allergenTable")
+        editor.remove()
+        tableMaker()
+    }
+
+}
 
 /*Returns am array of alleergens of product and possbly name from the API*/
 async function findInfo() {
@@ -97,7 +111,7 @@ async function tableMaker() {
                     editor.innerHTML += `<tr><td>${data[x]}</td><td>Yes</td></tr>`
                     x++
                 } else {
-                    editor.innerHTML += `<tr><td>${defaultAllergens[x]}</td><td>No</td></tr>`
+                    editor.innerHTML += `<tr><td>${data[x]}</td><td>No</td></tr>`
                 }
             }
 
@@ -105,3 +119,5 @@ async function tableMaker() {
     }
     console.log("function is working")
 }
+
+window.onload = definecounter()
