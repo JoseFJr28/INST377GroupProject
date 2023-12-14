@@ -1,19 +1,20 @@
 function definecounter() {
     var counter = 0;
+    return counter
 }
+var counter = 0
 
-function reset()    {
-    if (counter == 0)   {
+function reset(counter) {
+    if (counter == 0) {
         tableMaker()
     } else {
-        var editor = document.getElementById("allergenTable")
-        editor.remove()
+        document.getElementById("allergenTable").remove()
         tableMaker()
     }
 
 }
 
-/*Returns am array of alleergens of product*/
+/*Returns am array of alleergens of product and possbly name from the API*/
 async function findInfo() {
     var barcode = document.getElementById("barcode").value;
     //This is to get the allergens without the "en:" in their name
@@ -28,13 +29,15 @@ async function findInfo() {
     var dataArr = info.product
     console.log(dataArr)
 
+    //console.log(allergenCount)
     var allergens = dataArr.allergens_hierarchy
-    
+
     for (let i = 0; i < allergens.length; i++) {
+        //console.log(allergens[i].slice(3))
         allergenList.push(allergens[i].slice(3))
     }
-    
-    console.log(allergenList)
+
+    //console.log(allergenList)
     return allergenList
 }
 /*Returns an array that is selected from the form by the user
@@ -52,7 +55,7 @@ function pullFromForm() {
             }
         }
     })
-    
+    console.log(selectedAllergens)
     return selectedAllergens
 }
 /*Compares both arrays coming from pullfromform and findinfo 
@@ -70,28 +73,31 @@ async function filteredInfo() {
     console.log(defaultAllergens)
 
     for (let x = 0; x < selectedAllergens.length; x++) {
-        console.log(selectedAllergens[x])
+        //console.log(selectedAllergens[x])
         for (let y = 0; y < defaultAllergens.length; y++) {
-            
+            //console.log(defaultAllergens[y])
             if (defaultAllergens[y] == selectedAllergens[x]) {
-                
+                console.log("yes")
                 triggeredAllergens.push(selectedAllergens[x])
             } else {
                 continue
             }
         }
     }
-    console.log(triggeredAllergens)
+    //console.log(triggeredAllergens)
     return triggeredAllergens
 }
 
 /*Grabs the main array wfrom the comparison to display in table*/
 async function tableMaker() {
-    //event.preventDefault();
+    //counter = 0
+    console.log(document.getElementById("rows").rows.length)
+    if(document.getElementById('rows').rows.length == 0){
+
     var editor = document.getElementById("rows")
     var data = await filteredInfo()
     var defaultAllergens = await findInfo()
-    console.log(data.length)
+    console.log(editor.rows.length)
 
     if (data.length == 0) {
         editor.innerHTML += `&#128540 You are SAFE&#128077 `
@@ -100,16 +106,30 @@ async function tableMaker() {
         for (let x = 0; x < data.length; x++) {
             for (let y = 0; y < defaultAllergens.length; y++) {
                 if (defaultAllergens[y] == data[x]) {
-                    editor.innerHTML += `<td>${data[x]}</td><td>Yes</td>`
+                    editor.innerHTML += `<tr><td>${data[x]}</td><td>Yes</td></tr>`
                     x++
                 } else {
-                    editor.innerHTML += `<td>${data[x]}</td><td>No</td>`
+                    editor.innerHTML += `<tr><td>${defaultAllergens[x]}</td><td>No</td></tr>`
                 }
             }
-
         }
     }
+    }else{
+        document.getElementById("rows").remove()
+        console.log(document.getElementById("rows").rows.length = 0)
+        tableMaker()
+    }
+
     console.log("function is working")
 }
 
-window.onload = definecounter()
+function createOrDestroy(){
+    if(document.getElementById('rows').rows.length == 0){
+        tableMaker()
+    }else{
+        document.getElementById("rows").remove()
+        tableMaker()
+    }
+}
+
+//window.onload = definecounter()
