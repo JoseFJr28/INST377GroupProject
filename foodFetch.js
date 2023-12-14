@@ -13,12 +13,11 @@ function reset()    {
 
 }
 
-/*Returns am array of alleergens of product and possbly name from the API*/
+/*Returns am array of alleergens of product*/
 async function findInfo() {
     var barcode = document.getElementById("barcode").value;
     //This is to get the allergens without the "en:" in their name
     var allergenList = []
-    var finalAllergenList = []
 
 
     //Fetching the API
@@ -29,19 +28,12 @@ async function findInfo() {
     var dataArr = info.product
     console.log(dataArr)
 
-    //console.log(allergenCount)
     var allergens = dataArr.allergens_hierarchy
-    //console.log(allergens)
-    //    for (const [key,value] of Object.entries(allergens)){
-    //     console.log(typeof(value))
-    //     finalAllergenList.push(value.slice(3))
-    //    }
+    
     for (let i = 0; i < allergens.length; i++) {
-        console.log(allergens[i].slice(3))
         allergenList.push(allergens[i].slice(3))
     }
-    console.log(allergenList)
-    //console.log(finalAllergenList)
+    
     console.log(allergenList)
     return allergenList
 }
@@ -60,7 +52,7 @@ function pullFromForm() {
             }
         }
     })
-    console.log(selectedAllergens)
+    
     return selectedAllergens
 }
 /*Compares both arrays coming from pullfromform and findinfo 
@@ -80,9 +72,9 @@ async function filteredInfo() {
     for (let x = 0; x < selectedAllergens.length; x++) {
         console.log(selectedAllergens[x])
         for (let y = 0; y < defaultAllergens.length; y++) {
-            console.log(defaultAllergens[y])
+            
             if (defaultAllergens[y] == selectedAllergens[x]) {
-                console.log("yes")
+                
                 triggeredAllergens.push(selectedAllergens[x])
             } else {
                 continue
@@ -96,7 +88,7 @@ async function filteredInfo() {
 /*Grabs the main array wfrom the comparison to display in table*/
 async function tableMaker() {
     //event.preventDefault();
-    var editor = document.getElementById("allergenTable")
+    var editor = document.getElementById("rows")
     var data = await filteredInfo()
     var defaultAllergens = await findInfo()
     console.log(data.length)
@@ -108,10 +100,10 @@ async function tableMaker() {
         for (let x = 0; x < data.length; x++) {
             for (let y = 0; y < defaultAllergens.length; y++) {
                 if (defaultAllergens[y] == data[x]) {
-                    editor.innerHTML += `<tr><td>${data[x]}</td><td>Yes</td></tr>`
+                    editor.innerHTML += `<td>${data[x]}</td><td>Yes</td>`
                     x++
                 } else {
-                    editor.innerHTML += `<tr><td>${data[x]}</td><td>No</td></tr>`
+                    editor.innerHTML += `<td>${data[x]}</td><td>No</td>`
                 }
             }
 

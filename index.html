@@ -128,12 +128,18 @@
     <div id="popup">
         <p>This will be where the allergen info gets returned!</p>
         <div id="productName"></div>
+
+        <div>
         <table id="allergenTable">
             <tr>
             <th><b>Allergens</b></th>
             <th><b>Contains?</b></th>
             </tr>
+        </div>
 
+        <div>
+            <tr id="rows"></tr>
+        </div>
         </table>
         <b>
             <p>Note: Use the "allergens_hierarchy" array in the returned object from the API. This seems to produce the
