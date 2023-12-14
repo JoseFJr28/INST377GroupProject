@@ -87,8 +87,8 @@
     <a href="index.html">
         <li>Home</li>
     </a>
-    <a href="recipe.html">
-        <li>Recipes</li>
+    <a href="showcase.html">
+        <li>Showcase</li>
     </a>
     <a href="about.html">
         <li>About</li>
@@ -97,6 +97,42 @@
         <li>Contact</li>
     </a>
 </nav>
+
+<h2>Look at all these pictures of food! &#127830</h2>
+<p>Aren't they yummy?</p>
+
+<!--Slider-->
+<script>
+    for (let i = 0; i < 10; i++)  {
+    fetch("https://foodish-api.herokuapp.com/images")
+    .then((res) => res.json())
+    .then((res) => {
+        var foodID = `food${i}`
+        console.log(i)
+        var images = document.getElementById(foodID)
+        url = `<img src="${res.message}" width="612" height="612">`
+        console.log(url)
+        images.innerHTML = url
+    });
+    }
+</script>
+<div style="width:612px; height:612px" data-simple-slider id="slider">
+    <div id="food0"></div>
+    <div id="food1"></div>
+    <div id="food2"></div>
+    <div id="food3"></div>
+    <div id="food4"></div>
+    <div id="food5"></div>
+    <div id="food6"></div>
+    <div id="food7"></div>
+    <div id="food8"></div>
+    <div id="food9"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-slider/1.0.0/simpleslider.min.js"></script>
+<script>
+    simpleslider.getSlider();
+</script>
+<br>
 
 </body>
 
