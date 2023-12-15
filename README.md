@@ -4,8 +4,6 @@
 
 #### Our target browser is Google Chrome, Microsoft Edge, and Brave. 
 
-# =============================
-
 # DEVELOPER MANUAL
 
 ### This application uses NodeJS, Nodemon, and Express
