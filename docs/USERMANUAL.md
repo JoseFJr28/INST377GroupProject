@@ -10,4 +10,4 @@
 
 ### The allergens that you have selected will appear in the table to the right. Triggered allergens will have "no" highlighted in red written next to them.
 
-### If you wish to submit more than once, after the first submission you may have to click the submission button twice to get accurate information.
+### If you wish to submit more than once, after the first submission you may have to click the submission button twice to get accurate information. This is a known bug.
