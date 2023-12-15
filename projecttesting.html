@@ -1,0 +1,154 @@
+<html>
+<style>
+    /* The Logo */
+    header {
+        text-align: center;
+        font-size: 50px;
+    }
+
+    /* The Main Nav */
+    #main-nav {
+        background-color: lightblue;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    /* Get's rid of the bullets */
+    #main-nav li {
+        display: inline;
+        position: relative;
+    }
+
+    #main-nav li:hover {
+        background-color: rgb(0, 255, 162);
+        color: rgb(17, 15, 15);
+    }
+
+    #main-nav ul li {
+        display: inline-block;
+        text-align: center;
+        width: 10%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        list-style-type: none;
+    }
+
+    #allergenForm {
+        width: 50%;
+        padding: 5px;
+        float: left;
+    }
+
+    #popUp {
+        background-color: whitesmoke;
+        border: 2px solid;
+        margin: 20px;
+        padding: 5px;
+        width: 40%;
+        float: right
+    }
+</style>
+
+<head>
+    <title>Let Them Cook!</title>
+
+    <style>
+        body {
+            background-color: beige;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+
+    <script src="projecttesting2.js"></script>
+
+</head>
+<header>&#127828Let Them Cook!&#127859</header>
+<nav id="main-nav">
+    <a href="index.html">
+        <li>Home</li>
+    </a>
+    <a href="recipe.html">
+        <li>Recipes</li>
+    </a>
+    <a href="about.html">
+        <li>About</li>
+    </a>
+    <a href="contact.html">
+        <li>Contact</li>
+    </a>
+</nav>
+
+<body>
+
+    <div id="allergenForm">
+        <h3>Enter the barcode number of your product below and select which allergens you have.</h3>
+        <p>If you do not see an allergen you have, enter it in <i>Additional Allergens</i>.</p>
+        <br>
+
+        <form id="barcodeForm">
+            <label for="barcode">Enter Barcode Number:</label>
+            <input type="text" id="barcode" required>
+            <br><br>
+            <input type="checkbox" id="milk" name="milk" value="milk">
+            <label for="milk">Milk </label>
+            <br>
+            <input type="checkbox" id="eggs" name="eggs" value="eggs">
+            <label for="eggs">Eggs </label>
+            <br>
+            <input type="checkbox" id="peanuts" name="peanuts" value="peanuts">
+            <label for="peanuts">Peanuts </label>
+            <br>
+            <input type="checkbox" id="nuts" name="nuts" value="nuts">
+            <label for="nuts">Nuts </label>
+            <br>
+            <input type="checkbox" id="soybeans" name="soybeans" value="soybeans">
+            <label for="soybean">Soybeans </label>
+            <br>
+            <input type="checkbox" id="shellfish" name="shellfish" value="shellfish">
+            <label for="shellfish">Shellfish </label>
+            <br>
+            <input type="checkbox" id="fish" name="fish" value="fish">
+            <label for="fish">Fish </label>
+            <br>
+            <input type="checkbox" id="seasame" name="seasame" value="seasame">
+            <label for="seasame">Sesame </label>
+            <br>
+            <input type="checkbox" id="gluten" name="gluten" value="gluten">
+            <label for="gluten">Gluten </label>
+            <br><br>
+            <input type="submit" value="Submit" onclick="tableMaker();return false">
+        </form>
+    </div>
+
+    <div id="popup">
+        <p>This will be where the allergen info gets returned!</p>
+        <div id="productName"></div>
+
+        <div>
+        <table id="allergenTable">
+            <tr>
+            <th><b>Allergens</b></th>
+            <th><b>Contains?</b></th>
+            </tr>
+        </table>
+        </div>
+
+        <div>
+            <table id="rows">
+        </table>
+        </div>
+        
+        <b>
+            <p>Note: Use the "allergens_hierarchy" array in the returned object from the API. This seems to produce the
+                most reliable allergen information.</p>
+        </b>
+    </div>
+
+</body>
+
+</html>
